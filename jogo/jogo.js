@@ -8,6 +8,7 @@ var bola;
 var pontos;
 var maca_x;
 var maca_y;
+var magia;
 
 var paraEsquerda = false;
 var paraDireita = true;
@@ -15,8 +16,9 @@ var paraCima = false;
 var paraBaixo = false;
 var noJogo = true;    
 
-const TAMANHO_PONTO = 10;
-const ALEATORIO_MAXIMO = 29;
+const TAMANHO_PONTO = 40;
+const ALEATORIO_MAXIMOx = (innerWidth/TAMANHO_PONTO);
+const ALEATORIO_MAXIMOy = (innerHeight/TAMANHO_PONTO);
 const ATRASO = 140;
 const C_ALTURA = innerHeight;
 const C_LARGURA = innerWidth;    
@@ -28,6 +30,7 @@ const TECLA_ABAIXO = 40;
 
 var x = [];
 var y = [];
+
 onkeydown = verificarTecla; 
 
 
@@ -58,18 +61,18 @@ function carregarImagens() {
 
 function criarCobra() {
     pontos = 3;
-	
+	magia = 0;
     for (var z = 0; z < pontos; z++) {
-        x[z] = 50 - z * TAMANHO_PONTO;
-        y[z] = 50;
+        x[z] = 40 - z * TAMANHO_PONTO;
+        y[z] = 40;
     }
 }
 
 function localizarMaca() {
-    var r = Math.floor(Math.random() * ALEATORIO_MAXIMO);
+    var r = Math.floor(Math.random() * ALEATORIO_MAXIMOx);
     maca_x = r * TAMANHO_PONTO;
 
-    r = Math.floor(Math.random() * ALEATORIO_MAXIMO);
+    r = Math.floor(Math.random() * ALEATORIO_MAXIMOy);
     maca_y = r * TAMANHO_PONTO;
 }    
 
@@ -84,9 +87,12 @@ function cicloDeJogo() {
 }
 
 function verificarMaca() {
+    console.log(x[0],maca_x) 
     if ((x[0] == maca_x) && (y[0] == maca_y)) {
         pontos++;
+        magia += 100;
         localizarMaca();
+        score.innerHTML = magia;
     }
 }    
 
@@ -189,5 +195,6 @@ function verificarTecla(e) {
         paraBaixo = true;
         paraDireita = false;
         paraEsquerda = false;
-    }        
+    }       
+    
 }
