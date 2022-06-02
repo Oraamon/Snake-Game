@@ -16,7 +16,7 @@ var paraCima = false;
 var paraBaixo = false;
 var noJogo = true;    
 
-const TAMANHO_PONTO = 40;
+const TAMANHO_PONTO = 30;
 const ALEATORIO_MAXIMOx = (innerWidth/TAMANHO_PONTO);
 const ALEATORIO_MAXIMOy = (innerHeight/TAMANHO_PONTO);
 const ATRASO = 140;
@@ -42,6 +42,7 @@ function iniciar() {
 	ctx.fillStyle = "black";
 	ctx.fillRect(0, 0, C_LARGURA, C_ALTURA);
 
+
     carregarImagens();
     criarCobra();
     localizarMaca();
@@ -63,8 +64,8 @@ function criarCobra() {
     pontos = 3;
 	magia = 0;
     for (var z = 0; z < pontos; z++) {
-        x[z] = 40 - z * TAMANHO_PONTO;
-        y[z] = 40;
+        x[z] = 30 - z * TAMANHO_PONTO;
+        y[z] = 30;
     }
 }
 
@@ -93,6 +94,7 @@ function verificarMaca() {
         magia += 100;
         localizarMaca();
         score.innerHTML = magia;
+        myAudio.play();
     }
 }    
 
