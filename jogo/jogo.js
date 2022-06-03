@@ -36,6 +36,13 @@ onkeydown = verificarTecla;
 
 
 function iniciar() {
+    magia = 0
+    paraEsquerda = false;
+    paraDireita = true;
+    paraCima = false;
+    paraBaixo = false;
+    noJogo = true; 
+    score.innerHTML = magia;
     tela = document.getElementById("tela");
     ctx = tela.getContext("2d");
 
@@ -170,6 +177,15 @@ function fimDeJogo() {
     ctx.textAlign = "center"; 
     ctx.font = "normal bold 18px serif";
     ctx.fillText("Fim de Jogo", C_LARGURA/2, C_ALTURA/2);
+    
+    var delayInMilliseconds = 1000; //1 second
+
+setTimeout(function() {
+  //your code to be executed after 1 second
+}, delayInMilliseconds);
+
+    pointsEl.innerHTML = magia
+    Menu.style.display = 'flex'
 }
 
 function verificarTecla(e) {

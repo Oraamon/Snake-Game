@@ -6,6 +6,7 @@ console.log(canvas)
 const startGame = document.querySelector('#startGame')
 const Menu = document.querySelector('#Menu')
 const score = document.querySelector('#score')
+const pointsEl = document.querySelector('#pointsEl')
 const myAudio = new Audio('som_ponto.mp3');
 const myAudioBackground = new Audio('background_music.mp3');
 
