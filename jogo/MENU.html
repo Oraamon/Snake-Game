@@ -6,8 +6,9 @@ body{
 }
 </style>
 <script src="https://cdn.tailwindcss.com"></script>
-<source src="som_ponto.mp3" type="audio/mpeg" id="som_ponto">
+<source src="som_ponto.wav" type="audio/wav" id="som_ponto">
 <source src="background_music.mp3" type="audio/mpeg" >
+<source src="explosion.wav" type="audio/wav" id="som_morte">
 </head>
 <div class="fixed text-white font-bold text-sm ml-2 mt-1" ><span>Score: </span><span id="score">0</span></div>
 <div class="fixed inset-0 flex items-center justify-center" id="Menu">
@@ -17,6 +18,41 @@ body{
         <div>
             <button class="bg-blue-500 text-white w-full py-3 rounded-full text-sm" id="startGame">
                 Start Game</button>
+        </div>
+        
+    </div>
+</div>
+
+
+<div class="fixed inset-0 flex items-center justify-center" id="Menu2">
+    <div class="bg-white max-w-md w-full p-6 text-center">
+        <h1 class="text-4xl font-bold leading-none" id="pointsEl2">0</h1>
+        <p class="text-sm text-gray-700 mb-4">Points</p>
+        <div>
+            <button class="bg-blue-500 text-white w-full py-3 rounded-full text-sm" id="Bttscoreboard">
+                Scoreboard</button>
+        </div>
+        
+    </div>
+</div>
+
+<div class="fixed inset-0 flex items-center justify-center" id="scoreboard">
+    <div class="bg-white max-w-md w-full p-6 text-center">
+        <h1 class="text-4xl font-bold leading-none" id="points1">0</h1>
+        <p class="text-sm text-gray-700 mb-4" id ="score1">Points</p>
+        <h1 class="text-4xl font-bold leading-none" id="points2">0</h1>
+        <p class="text-sm text-gray-700 mb-4" id ="score2">Points</p>
+        <h1 class="text-4xl font-bold leading-none" id="points3">0</h1>
+        <p class="text-sm text-gray-700 mb-4" id ="score3">Points</p>
+        <h1 class="text-4xl font-bold leading-none" id="points4">0</h1>
+        <p class="text-sm text-gray-700 mb-4" id ="score4">Points</p>
+        <h1 class="text-4xl font-bold leading-none" id="points5">0</h1>
+        <p class="text-sm text-gray-700 mb-4" id ="score5">Points</p>
+        <h1 class="text-4xl font-bold leading-none" id="pointsEl3">0</h1>
+        <p class="text-sm text-gray-700 mb-4">Your Points</p>
+        <div>
+            <button class="bg-blue-500 text-white w-full py-3 rounded-full text-sm" id="restartGame">
+                Restart Game</button>
         </div>
         
     </div>

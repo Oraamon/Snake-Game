@@ -176,16 +176,17 @@ function fimDeJogo() {
     ctx.textBaseline = "middle"; 
     ctx.textAlign = "center"; 
     ctx.font = "normal bold 18px serif";
+    myAudiomorte.play();
     ctx.fillText("Fim de Jogo", C_LARGURA/2, C_ALTURA/2);
     
     var delayInMilliseconds = 1000; //1 second
 
 setTimeout(function() {
-  //your code to be executed after 1 second
+    pointsEl2.innerHTML = magia
+    Menu2.style.display = 'flex'
 }, delayInMilliseconds);
 
-    pointsEl.innerHTML = magia
-    Menu.style.display = 'flex'
+    
 }
 
 function verificarTecla(e) {
