@@ -3,12 +3,15 @@ var ctx;
 
 var cabeca;
 var maca;
+var obstaculo;
 var bola;
 var vidas;
 var qnt = 15
 var pontos;
 var maca_x = []
 var maca_y = []
+var obs_x = []
+var obs_y = []
 var magia;
 
 var paraEsquerda = false;
@@ -23,7 +26,8 @@ const ALEATORIO_MAXIMOy = (innerHeight/TAMANHO_PONTO);
 const ATRASO = 140;
 const C_ALTURA = innerHeight;
 const C_LARGURA = innerWidth;    
-
+const altura = C_ALTURA-C_ALTURA%30
+const largura = C_LARGURA-C_LARGURA%30
 const TECLA_ESQUERDA = 37;
 const TECLA_DIREITA = 39;
 const TECLA_ACIMA = 38;
@@ -55,7 +59,7 @@ function iniciar() {
     carregarImagens();
     criarCobra();
     localizarMaca();
-  
+    localizarObstaculo();
     
     setTimeout("cicloDeJogo()", ATRASO);
 }    
@@ -69,8 +73,8 @@ function carregarImagens() {
     
     maca = new Image();
     maca.src = "maca.png"; 
-    maca2 = new Image();
-    maca2.src = "maca.png"; 
+    obstaculo = new Image();
+    obstaculo.src = "obstaculo.png"; 
 }
 
 function criarCobra() {
@@ -89,11 +93,21 @@ function localizarMaca() {
 
     r = Math.floor(Math.random() * ALEATORIO_MAXIMOy);
     maca_y[i] = r * TAMANHO_PONTO;}
-}    
+}   
+
+function localizarObstaculo() {
+    for(i=0;i<10;i++){
+    var r = Math.floor(Math.random() * ALEATORIO_MAXIMOx);
+    obs_x[i] = r * TAMANHO_PONTO;
+
+    r = Math.floor(Math.random() * ALEATORIO_MAXIMOy);
+    obs_y[i] = r * TAMANHO_PONTO;}
+} 
 
 function cicloDeJogo() {
     if (noJogo) {
         verificarMaca();
+        verificarObstaculo();
         verificarColisao();
         mover();
         fazerDesenho();
@@ -116,6 +130,28 @@ function verificarMaca() {
     }}
 }    
 
+function verificarObstaculo() {
+    for(i=0;i<10;i++){
+    
+    if ((x[0] == obs_x[i]) && (y[0] == obs_y[i])) {
+        
+        
+        
+        vidas++;
+            paraEsquerda = false;
+            paraDireita = true;
+        paraCima = false;
+        paraBaixo = false;
+            for (var z = 0; z < pontos; z++) {
+                x[z] = 30 - z * TAMANHO_PONTO;
+                y[z] = 30;
+            }
+
+        score.innerHTML = magia;
+        myAudiomorte.play();
+    }}
+} 
+
 function verificarColisao() {
     for (var z = pontos; z > 0; z--) {
         if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
@@ -132,51 +168,20 @@ function verificarColisao() {
     }
 
     if (y[0] >= C_ALTURA) {
-        vidas++;
-        paraEsquerda = false;
-        paraDireita = true;
-    paraCima = false;
-    paraBaixo = false;
-        for (var z = 0; z < pontos; z++) {
-            x[z] = 30 - z * TAMANHO_PONTO;
-            y[z] = 30;
-        }
+        y[0] = 0
     }
 
     if (y[0] < 0) {
-        vidas++;
-        paraEsquerda = false;
-        paraDireita = true;
-    paraCima = false;
-    paraBaixo = false;
-        for (var z = 0; z < pontos; z++) {
-            x[z] = 30 - z * TAMANHO_PONTO;
-            y[z] = 30;
-        }
+      y[0] = altura
     }
 
     if (x[0] >= C_LARGURA) {
-        vidas++;
-        paraEsquerda = false;
-        paraDireita = true;
-    paraCima = false;
-    paraBaixo = false;
-        for (var z = 0; z < pontos; z++) {
-            x[z] = 30 - z * TAMANHO_PONTO;
-            y[z] = 30;
-        }
+       x[0] = 0
     }
 
     if (x[0] < 0) {
-        vidas++;
-         paraEsquerda = false;
-            paraDireita = true;
-        paraCima = false;
-        paraBaixo = false;
-        for (var z = 0; z < pontos; z++) {
-            x[z] = 30 - z * TAMANHO_PONTO;
-            y[z] = 30;
-        }
+       x[0] = largura
+        
     }
     if(vidas == 3 || qnt == 0){
         noJogo = false;
@@ -213,7 +218,12 @@ function fazerDesenho() {
     if (noJogo) {
         for(i = 0 ; i<qnt;i++){
         ctx.drawImage(maca, maca_x[i], maca_y[i]);      
+        
 		}
+        for(i = 0 ; i<10;i++){
+                 
+            ctx.drawImage(obstaculo, obs_x[i], obs_y[i]);  
+            }
         for (var z = 0; z < pontos; z++) {
             if (z == 0) {
                 ctx.drawImage(cabeca, x[z], y[z]);
@@ -272,4 +282,86 @@ function verificarTecla(e) {
         paraEsquerda = false;
     }       
     console.log(maca_x)
+}
+
+var mostrador = document.querySelector('#tempo');
+
+startGame.addEventListener('click', function() {
+    new Timer(1, mostrador, function() {
+        vidas = 3
+    }).start();
+});
+
+function Timer(mins, target, cb) {
+    this.counter = mins * 30;
+    this.target = target;
+    this.callback = cb;
+}
+Timer.prototype.pad = function(s) {
+    return (s < 10) ? '0' + s : s;
+}
+Timer.prototype.start = function(s) {
+    this.count();
+}
+Timer.prototype.stop = function(s) {
+    this.count();
+}
+Timer.prototype.done = function(s) {
+    if (this.callback) this.callback();
+}
+Timer.prototype.display = function(s) {
+    this.target.innerHTML = this.pad(s);
+}
+Timer.prototype.count = function(s) {
+    var self = this;
+    self.display.call(self, self.counter);
+    self.counter--;
+    var clock = setInterval(function() {
+        self.display(self.counter);
+        self.counter--;
+        if (self.counter < 0 || vidas == 3) {
+            clearInterval(clock);
+            self.done.call(self);
+        }
+    }, 1000);
+}
+
+restartGame.addEventListener('click', function() {
+    new Timer(1, mostrador, function() {
+        vidas = 3
+    }).start();
+});
+
+function Timer(mins, target, cb) {
+    this.counter = mins * 30;
+    this.target = target;
+    this.callback = cb;
+}
+Timer.prototype.pad = function(s) {
+    return (s < 10) ? '0' + s : s;
+}
+Timer.prototype.start = function(s) {
+    this.count();
+}
+Timer.prototype.stop = function(s) {
+    this.count();
+}
+Timer.prototype.done = function(s) {
+    if (this.callback) this.callback();
+}
+Timer.prototype.display = function(s) {
+    this.target.innerHTML = this.pad(s);
+}
+Timer.prototype.count = function(s) {
+    var self = this;
+    self.display.call(self, self.counter);
+    self.counter--;
+    var clock = setInterval(function() {
+        self.display(self.counter);
+        self.counter--;
+        if (self.counter < 0 || vidas == 3) {
+            clearInterval(clock);
+            self.done.call(self);
+        }
+    }, 1000);
 }

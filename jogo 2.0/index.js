@@ -46,8 +46,8 @@ score3.innerHTML = `${scores.name[2]} Points`
 score4.innerHTML = `${scores.name[3]} Points`
 score5.innerHTML = `${scores.name[4]} Points`
 
-myAudiomorte.volume=0.5
-
+myAudiomorte.volume=0.1
+myAudio.volume = 0.5
 Menu2.style.display = 'none'
 Scoreboard.style.display = 'none'
 
@@ -123,7 +123,7 @@ restartGame.addEventListener('click', () => {
     myAudioBackground.loop = true;
 }
 myAudioBackground.play()
-myAudioBackground.volume=0.05
+myAudioBackground.volume=1
 })
 
 
