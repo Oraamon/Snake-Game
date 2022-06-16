@@ -160,6 +160,7 @@ function verificarColisao() {
             paraDireita = true;
         paraCima = false;
         paraBaixo = false;
+        myAudiomorte.play();
             for (var z = 0; z < pontos; z++) {
                 x[z] = 30 - z * TAMANHO_PONTO;
                 y[z] = 30;
@@ -241,7 +242,11 @@ function fimDeJogo() {
     ctx.textBaseline = "middle"; 
     ctx.textAlign = "center"; 
     ctx.font = "normal bold 18px serif";
-    myAudiomorte.play();
+    myAudioEnd.volume = 0.25
+    myAudioEnd.play()
+    myAudioBackground.loop = false;
+    myAudioBackground.pause()
+    
     ctx.fillText("Fim de Jogo", C_LARGURA/2, C_ALTURA/2);
     
     var delayInMilliseconds = 1000; //1 second

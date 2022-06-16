@@ -23,6 +23,7 @@ const pointsEl = document.querySelector('#pointsEl')
 const myAudio = new Audio('som_ponto.wav');
 const myAudiomorte = new Audio('explosion.wav');
 const myAudioBackground = new Audio('background_music.mp3');
+const myAudioEnd = new Audio('victory.mp3');
 const Menu2 = document.querySelector('#Menu2')
 const pointsEl2 = document.querySelector('#pointsEl2')
 const pointsEl3 = document.querySelector('#pointsEl3')
@@ -123,7 +124,7 @@ restartGame.addEventListener('click', () => {
     myAudioBackground.loop = true;
 }
 myAudioBackground.play()
-myAudioBackground.volume=1
+myAudioBackground.volume=0.05
 })
 
 
@@ -145,10 +146,5 @@ score5.innerHTML = `${scores.name[4]} Points`
     Menu2.style.display = 'none'
     Scoreboard.style.display = 'flex'
     pointsEl3.innerHTML = magia;
-    if (typeof myAudioBackground.loop == 'boolean')
-{
-    myAudioBackground.loop = true;
-}
-myAudioBackground.play()
-myAudioBackground.volume=0.05
+
 })
