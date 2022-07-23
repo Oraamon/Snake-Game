@@ -41,6 +41,7 @@ onkeydown = verificarTecla;
 
 
 function iniciar() {
+	qnt = 15
     vidas = 0
     magia = 0
     paraEsquerda = false;
